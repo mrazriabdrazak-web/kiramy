@@ -1,0 +1,295 @@
+<!doctype html>
+<!--
+KiraMY by Razri
+Copyright © 2026 Razri. All Rights Reserved.
+Release: V1.2.0
+Public-use calculators; source/interface reproduction prohibited without written permission.
+-->
+
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KiraMY by Razri — Malaysia Financial Calculators</title>
+<style>
+:root{--bg:#f4f7f8;--card:#fff;--ink:#162126;--muted:#65747b;--line:#dce5e8;--accent:#0a7b64;--soft:#e8f7f2;--warn:#fff7d8;--danger:#fff0ef}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}
+header{background:#0d1f1c;color:#fff;padding:18px 22px}.wrap{max-width:1240px;margin:auto}.brand{font-size:28px;font-weight:850}.brand span{color:#5de1bc}.meta{font-size:12px;color:#b8ccc6;margin-top:3px}
+main{max-width:1240px;margin:auto;padding:26px 18px 54px}.hero h1{font-size:clamp(30px,5vw,48px);margin:5px 0 8px;letter-spacing:-1.3px}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);text-transform:uppercase;letter-spacing:.12em}.sub,.muted{color:var(--muted);line-height:1.55}.sub{max-width:900px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tab{border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:999px;font-weight:800;cursor:pointer}.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.panel{display:none}.panel.active{display:block}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:18px}.grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.fields label{font-size:13px;font-weight:750;color:#3e4e55}.fields input,.fields select{width:100%;margin-top:6px;padding:11px;border:1px solid #cbd6da;border-radius:10px;background:#fff}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.metric{border:1px solid var(--line);border-radius:13px;padding:13px;background:#fbfdfd}.metric span{display:block;font-size:12px;color:var(--muted)}.metric strong{font-size:21px}.metric.heroM{background:var(--soft);border-color:#bfe8da}.metric.heroM strong{color:var(--accent)}
+.table{overflow:auto;border:1px solid var(--line);border-radius:14px}table{border-collapse:collapse;width:100%;min-width:820px}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}th{background:#f8fafb;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em}.badge{display:inline-block;border-radius:999px;padding:4px 7px;font-size:10px;font-weight:850;background:#eef3f4}.ok{background:var(--soft);color:var(--accent)}.warn{background:var(--warn);color:#765c00}.bad{background:var(--danger);color:#97372f}
+.notice{background:var(--warn);border:1px solid #ecd995;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.55;margin-top:12px}.btn{border:0;border-radius:11px;background:var(--accent);color:#fff;padding:12px 15px;font-weight:850;cursor:pointer}.small{font-size:12px}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.summary .metric strong{font-size:18px}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.summary{grid-template-columns:1fr 1fr}}@media(max-width:560px){.fields,.metrics,.summary{grid-template-columns:1fr}.tab{flex:1 1 45%;padding:9px}}
+
+/* V1.1 mobile interface */
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{min-width:0}
+button,input,select{font-size:16px}
+button{touch-action:manipulation}
+.tabs{
+  overflow-x:auto;
+  flex-wrap:nowrap;
+  padding-bottom:6px;
+  scrollbar-width:thin;
+  -webkit-overflow-scrolling:touch;
+}
+.tab{
+  min-height:44px;
+  white-space:nowrap;
+  flex:0 0 auto;
+}
+.fields input,.fields select{
+  min-height:46px;
+}
+.btn{
+  min-height:46px;
+}
+.table{
+  -webkit-overflow-scrolling:touch;
+}
+.mobile-hint{
+  display:none;
+}
+.quick-nav{
+  display:none;
+}
+@media(max-width:700px){
+  header{padding:14px 16px}
+  .brand{font-size:24px}
+  .meta{font-size:11px;line-height:1.4}
+  main{padding:20px 12px 40px}
+  .hero h1{font-size:34px;line-height:1.07}
+  .sub{font-size:14px}
+  .tabs{
+    margin:14px -12px 18px;
+    padding:0 12px 8px;
+    gap:7px;
+    border-bottom:1px solid var(--line);
+  }
+  .tab{
+    padding:10px 13px;
+    border-radius:12px;
+  }
+  .card{
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:14px;
+  }
+  .grid,.fields,.metrics,.summary{
+    grid-template-columns:1fr;
+  }
+  .metric{
+    padding:12px;
+  }
+  .metric strong{
+    font-size:20px;
+    word-break:break-word;
+  }
+  h2{font-size:18px;margin-top:0}
+  .notice{font-size:12.5px}
+  .mobile-hint{
+    display:block;
+    font-size:11px;
+    color:var(--muted);
+    margin:6px 0 10px;
+  }
+  .table{
+    border-radius:12px;
+  }
+  table{
+    min-width:720px;
+  }
+  th,td{
+    padding:9px 8px;
+    font-size:12px;
+  }
+  .quick-nav{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+    margin:0 0 14px;
+  }
+  .quick-nav button{
+    min-height:46px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:800;
+    color:var(--ink);
+  }
+}
+@media(max-width:380px){
+  .hero h1{font-size:30px}
+  main{padding-left:10px;padding-right:10px}
+  .tabs{margin-left:-10px;margin-right:-10px;padding-left:10px;padding-right:10px}
+  .quick-nav{grid-template-columns:repeat(2,1fr)}
+}
+
+
+/* KiraMY ownership branding */
+footer strong{color:var(--ink)}
+#ownership h2{font-size:24px;margin-bottom:8px}
+
+</style>
+<meta name="author" content="Razri">
+<meta name="copyright" content="Copyright © 2026 Razri. All Rights Reserved.">
+<meta name="application-name" content="KiraMY by Razri">
+<meta name="description" content="KiraMY by Razri — Malaysian salary, home loan, vehicle financing, personal financing, deposit, savings and credit card calculators.">
+<meta name="robots" content="index,follow">
+
+</head><body>
+<header><div class="wrap"><div class="brand">Kira<span>MY</span> <small style="font-size:13px;font-weight:700;color:#b8ccc6">by Razri</small></div><div class="meta">KiraMY by Razri · V1.2.0 · Malaysia Financial Calculator Suite · Rates checked 2 Oct 2026</div></div></header>
+<main>
+<div class="hero"><div class="eyebrow">Unified Release</div><h1>Malaysia Financial Calculators</h1><p class="sub">Salary, housing, vehicle financing, personal financing, deposits, savings and credit-card repayment in one self-contained calculator suite. Bank-specific values are prefilled only where a current official public value was verified.</p></div>
+<div class="summary">
+<div class="metric"><span>BNM OPR / SBR reference</span><strong>2.75%</strong></div>
+<div class="metric"><span>Home bank rows</span><strong>12</strong></div>
+<div class="metric"><span>Personal finance rows</span><strong>11</strong></div>
+<div class="metric"><span>Rate data checked</span><strong>2 Oct 2026</strong></div>
+</div>
+
+
+<div class="quick-nav" aria-label="Quick calculator navigation">
+  <button type="button" data-jump="salary">Salary</button>
+  <button type="button" data-jump="home">Home</button>
+  <button type="button" data-jump="car">Car</button>
+  <button type="button" data-jump="personal">Personal</button>
+  <button type="button" data-jump="fd">FD</button>
+  <button type="button" data-jump="savings">Savings</button>
+  <button type="button" data-jump="card">Card</button>
+  <button type="button" data-jump="ownership">Owner</button><button type="button" data-jump="rates">Rates</button>
+</div>
+
+<nav class="tabs">
+<button class="tab active" data-tab="salary">Salary</button><button class="tab" data-tab="home">Home</button><button class="tab" data-tab="car">Car</button><button class="tab" data-tab="personal">Personal Loan</button><button class="tab" data-tab="fd">FD / TD-i</button><button class="tab" data-tab="savings">Savings</button><button class="tab" data-tab="card">Credit Card</button><button class="tab" data-tab="ownership">Ownership</button><button class="tab" data-tab="rates">Rate Library</button>
+</nav>
+
+<section id="salary" class="panel active">
+<div class="grid"><div class="card"><h2>Salary & take-home pay</h2><div class="fields">
+<label>Gross monthly salary (RM)<input id="salGross" type="number" min="0" value="8500"></label>
+<label>Age<select id="salAge"><option value="u60">Below 60</option><option value="60">60 and above</option></select></label>
+<label>EPF employee % <input id="salEpfPct" type="number" min="0" max="30" step=".1" value="11"></label>
+<label>EIS eligible<select id="salEis"><option value="yes">Yes</option><option value="no">No</option></select></label>
+</div><div class="notice">This compact salary module uses percentage estimates for EPF/SOCSO/EIS and excludes PCB. Use it for planning only; statutory table exactness belongs to the dedicated payroll engine.</div></div>
+<div class="card"><h2>Estimate</h2><div class="metrics"><div class="metric heroM"><span>Take-home before PCB</span><strong id="salNet"></strong></div><div class="metric"><span>EPF employee</span><strong id="salEpfOut"></strong></div><div class="metric"><span>SOCSO est.</span><strong id="salSocso"></strong></div><div class="metric"><span>EIS est.</span><strong id="salEisOut"></strong></div></div></div></div>
+</section>
+
+<section id="home" class="panel"><div class="grid"><div class="card"><h2>Home loan / financing</h2><div class="fields">
+<label>Property price (RM)<input id="hPrice" type="number" value="500000"></label><label>Down payment %<input id="hDown" type="number" value="10"></label>
+<label>Rate % p.a.<input id="hRate" type="number" step=".01" value="4.30"></label><label>Tenure years<input id="hYears" type="number" value="30"></label></div></div>
+<div class="card"><h2>Result</h2><div class="metrics"><div class="metric heroM"><span>Monthly</span><strong id="hMonthly"></strong></div><div class="metric"><span>Loan amount</span><strong id="hLoan"></strong></div><div class="metric"><span>Total interest</span><strong id="hInt"></strong></div><div class="metric"><span>Total repayment</span><strong id="hTotal"></strong></div></div></div></div>
+<div class="card"><h2>Verified / quote-required bank references</h2><div class="mobile-hint">Swipe left/right to view the full comparison table.</div><div class="table"><table><thead><tr><th>Bank</th><th>Indicative rate</th><th>Status</th><th>Effective</th></tr></thead><tbody id="homeRows"></tbody></table></div></div></section>
+
+<section id="car" class="panel"><div class="grid"><div class="card"><h2>Vehicle financing</h2><div class="fields">
+<label>Vehicle price (RM)<input id="cPrice" type="number" value="100000"></label><label>Down payment %<input id="cDown" type="number" value="10"></label>
+<label>Rate % p.a.<input id="cRate" type="number" step=".01" value="5.10"></label><label>Tenure years<input id="cYears" type="number" value="7"></label>
+<label>Method<select id="cMethod"><option value="rb">2026 reducing balance</option><option value="flat">Legacy flat-rate estimate</option></select></label></div></div>
+<div class="card"><h2>Result</h2><div class="metrics"><div class="metric heroM"><span>Monthly</span><strong id="cMonthly"></strong></div><div class="metric"><span>Finance amount</span><strong id="cLoan"></strong></div><div class="metric"><span>Total cost</span><strong id="cInt"></strong></div><div class="metric"><span>Total repayment</span><strong id="cTotal"></strong></div></div><div class="notice">HPAA took effect 1 June 2026. Banks have a transition period through 31 March 2027; the new framework moves toward reducing-balance/EIR presentation. Keep legacy flat mode for older agreements only.</div></div></div>
+<div class="card"><h2>Current verified vehicle-financing references</h2><div class="mobile-hint">Swipe left/right to view the full comparison table.</div><div class="table"><table><thead><tr><th>Bank</th><th>Vehicle / product</th><th>Rate</th><th>Basis</th><th>Status</th></tr></thead><tbody id="carRows"></tbody></table></div></div></section>
+
+<section id="personal" class="panel"><div class="grid"><div class="card"><h2>Personal financing</h2><div class="fields">
+<label>Amount (RM)<input id="pAmt" type="number" value="30000"></label><label>Rate % p.a.<input id="pRate" type="number" step=".01" value="6.50"></label>
+<label>Tenure years<input id="pYears" type="number" value="5"></label><label>Method<select id="pMethod"><option value="flat">Flat / fixed</option><option value="rb">Reducing balance</option></select></label></div></div>
+<div class="card"><h2>Result</h2><div class="metrics"><div class="metric heroM"><span>Monthly</span><strong id="pMonthly"></strong></div><div class="metric"><span>Total financing cost</span><strong id="pCost"></strong></div><div class="metric"><span>Total repayment</span><strong id="pTotal"></strong></div><div class="metric"><span>Input rate</span><strong id="pRateOut"></strong></div></div></div></div>
+<div class="card"><h2>Published personal-financing ranges</h2><div class="mobile-hint">Swipe left/right to view the full comparison table.</div><div class="table"><table><thead><tr><th>Bank</th><th>Product</th><th>Rate range</th><th>Basis</th><th>Amount</th></tr></thead><tbody id="personalRows"></tbody></table></div></div></section>
+
+<section id="fd" class="panel"><div class="grid"><div class="card"><h2>Fixed Deposit / TD-i</h2><div class="fields">
+<label>Principal (RM)<input id="fdP" type="number" value="50000"></label><label>Bank/product<select id="fdBank"></select></label><label>Tenure<select id="fdTenure"></select></label></div></div>
+<div class="card"><h2>Result</h2><div class="metrics"><div class="metric heroM"><span>Maturity estimate</span><strong id="fdMaturity"></strong></div><div class="metric"><span>Interest / profit</span><strong id="fdInterest"></strong></div></div></div></div></section>
+
+<section id="savings" class="panel"><div class="grid"><div class="card"><h2>Savings interest estimator</h2><div class="fields">
+<label>Balance (RM)<input id="sBal" type="number" value="50000"></label><label>Rate % p.a.<input id="sRate" type="number" step=".01" value="1.65"></label><label>Months<input id="sMonths" type="number" min="1" max="60" value="12"></label></div></div>
+<div class="card"><h2>Result</h2><div class="metrics"><div class="metric heroM"><span>Estimated interest / profit</span><strong id="sInterest"></strong></div><div class="metric"><span>End balance</span><strong id="sEnd"></strong></div></div><p class="muted">Simple interest estimate. Bonus/tier conditions must be checked against the product rules.</p></div></div>
+<div class="card"><h2>Published savings-account references</h2><div class="mobile-hint">Swipe left/right to view the full comparison table.</div><div class="table"><table><thead><tr><th>Bank</th><th>Account</th><th>Min rate</th><th>Max rate</th><th>Rule</th><th>Effective</th></tr></thead><tbody id="savingRows"></tbody></table></div></div></section>
+
+<section id="card" class="panel"><div class="grid"><div class="card"><h2>Credit card repayment</h2><div class="fields">
+<label>Outstanding balance (RM)<input id="ccBal" type="number" value="5000"></label><label>Annual finance charge<select id="ccRate"><option value="15">15% — Tier I</option><option value="17">17% — Tier II</option><option value="18">18% — Tier III / new</option></select></label>
+<label>Monthly payment (RM)<input id="ccPay" type="number" value="500"></label></div></div>
+<div class="card"><h2>Payoff estimate</h2><div class="metrics"><div class="metric heroM"><span>Months to clear</span><strong id="ccMonths"></strong></div><div class="metric"><span>Total finance charge</span><strong id="ccInterest"></strong></div><div class="metric"><span>Total paid</span><strong id="ccTotal"></strong></div><div class="metric"><span>Rate</span><strong id="ccRateOut"></strong></div></div><div class="notice">Assumes no new spending, no cash advances, and a fixed payment every month. Actual statement minimums, taxes, fees and daily-rest calculations may differ.</div></div></div>
+<div class="card"><h2>Verified card fee references</h2><div class="mobile-hint">Swipe left/right to view the full comparison table.</div><div class="table"><table><thead><tr><th>Bank</th><th>Tier I</th><th>Tier II</th><th>Tier III</th><th>Minimum payment</th><th>Late charge</th><th>Cash advance</th></tr></thead><tbody id="cardRows"></tbody></table></div></div></section>
+
+
+<section id="ownership" class="panel">
+  <div class="card">
+    <div class="eyebrow">Ownership & Usage</div>
+    <h2>KiraMY by Razri</h2>
+    <p><strong>Copyright © 2026 Razri. All Rights Reserved.</strong></p>
+    <p class="muted">
+      KiraMY's original source code, interface design, written explanations, data organization,
+      branding and compiled presentation are proprietary to the project owner, except for
+      third-party facts, official bank/regulator information and other material belonging to
+      their respective owners.
+    </p>
+    <div class="notice">
+      <strong>Permitted:</strong> members of the public may use the hosted KiraMY calculators for
+      personal calculations. <strong>Not permitted without written permission:</strong> copying,
+      republishing, redistributing, selling, sublicensing, mirroring, rebranding, or creating a
+      substantially copied version of the KiraMY source/interface.
+    </div>
+    <p class="muted small">
+      Mathematical formulas, financial methods, statutory rules and factual bank rates are not
+      claimed as proprietary ideas. KiraMY claims ownership only over protectable original
+      expression and project materials.
+    </p>
+  </div>
+</section>
+
+<section id="rates" class="panel"><div class="card"><h2>Rate library status</h2><p class="muted">All bank-dependent modules use the same embedded rate library. Missing values intentionally remain blank/quote-required. Promotional and product-specific rates should always be rechecked before a financial decision.</p>
+<div class="mobile-hint">Swipe left/right to view the full comparison table.</div><div class="table"><table><thead><tr><th>Category</th><th>Coverage</th><th>Current state</th></tr></thead><tbody>
+<tr><td>Home loan / financing</td><td>12 bank groups</td><td><span class="badge ok">LIVE</span></td></tr>
+<tr><td>Vehicle financing</td><td>Verified CIMB/RHB references + quote rows</td><td><span class="badge ok">LIVE</span></td></tr>
+<tr><td>Personal financing</td><td>11 published product/rate structures</td><td><span class="badge ok">LIVE</span></td></tr>
+<tr><td>FD / TD-i</td><td>4 verified board-rate sets</td><td><span class="badge ok">LIVE</span></td></tr>
+<tr><td>Savings</td><td>CIMB, Standard Chartered, AmBank examples</td><td><span class="badge ok">LIVE</span></td></tr>
+<tr><td>Credit cards</td><td>Tiered 15/17/18 structure + selected bank fees</td><td><span class="badge ok">LIVE</span></td></tr>
+</tbody></table></div></div></section>
+</main>
+
+
+<footer style="max-width:1240px;margin:0 auto 34px;padding:0 18px;color:#65747b;font-size:12px;line-height:1.6;text-align:center">
+  <strong>KiraMY by Razri</strong><br>
+  Copyright © 2026 Razri. All Rights Reserved.<br>
+  Unauthorized copying, redistribution, mirroring, resale or rebranding of this project is prohibited.
+</footer>
+
+<script>
+const D={"checked":"2026-10-02","opr":2.75,"home":[["AFFIN / AFFIN Islamic",4.3,"Verified indicative","2025-07-11"],["Bank Rakyat",4.4,"Verified indicative","2025-07-17"],["BSN",4.1,"Verified indicative","2025-07-17"],["CIMB / CIMB Islamic",5.1,"Illustrative standard","2025-07-14"],["OCBC / OCBC Al-Amin",null,"Official-source conflict","2025-07-15"],["RHB / RHB Islamic",4.5,"Verified indicative","2025-07-11"],["Standard Chartered / Saadiq",4.6,"Verified indicative","2025-07-16"],["UOB Malaysia",4.36,"Verified indicative","2025-07-11"],["Maybank / Maybank Islamic",null,"Quote required","2025-07-11"],["Public Bank / Public Islamic",null,"Quote required","2025-07"],["Hong Leong / Hong Leong Islamic",null,"Quote required","2025-07-14"],["AmBank / AmBank Islamic",null,"Quote required","2025-07"]],"car":[["CIMB","New national passenger vehicle",6.75,"Effective rate","Verified"],["CIMB","New foreign passenger vehicle",5.1,"Effective rate","Verified"],["CIMB","New unregistered reconditioned",5.65,"Effective rate","Verified"],["CIMB","Used national passenger vehicle",8.15,"Effective rate","Verified"],["CIMB","Used foreign passenger vehicle",7.4,"Effective rate","Verified"],["RHB Islamic","Green vehicle financing",3.85,"SBR 2.75 + 1.10","Verified"],["Bank Rakyat","Vehicle Financing-i An Naqlu 2",null,"Contact branch","Quote required"],["Maybank / Maybank Islamic","Hire Purchase / HP-i",null,"Reducing balance from 1 Aug 2026","Quote required"]],"personal":[["Maybank / Maybank Islamic","Personal Loan / PF-i",6.5,8.0,"Fixed tier","RM5k\u2013RM100k"],["CIMB","Cash Plus Personal Loan",4.38,19.88,"Fixed range","RM2k\u2013RM100k"],["Alliance / Alliance Islamic","Digital Personal Loan / PF-i",4.99,14.78,"Flat range","RM5k\u2013RM200k"],["AmBank Islamic","Personal Financing-i",3.45,4.25,"Promo/standard fixed","RM5k\u2013RM200k"],["RHB Islamic","PF-i Private Sector",7.62,20.0,"Equivalent flat / package","RM16k\u2013RM150k"],["RHB Islamic","PF-i Civil Sector",2.63,null,"Promo equivalent flat","Up to RM300k"],["Bank Rakyat","DivA Public Sector",3.17,3.88,"Fixed tier","Tenure based"],["Bank Rakyat","DivA Private Sector",4.39,4.88,"Fixed tier","Tenure based"],["Bank Rakyat","InstaCash",13.08,13.08,"SBR-linked effective","Up to RM50k"],["BSN","MyRinggit-i Professional",5.4,6.05,"SBR-linked","RM10k\u2013RM400k"],["BSN","MyRinggit-i Perintis",5.62,5.62,"SBR-linked","RM5k\u2013RM50k"]],"fd":[["AmBank / AmBank Islamic","FD / TD-i Board",1.65,1.65,1.75,1.8,2.0,"2026-08-25"],["Standard Chartered","Fixed Deposit Board",1.75,1.95,2.05,2.05,2.05,"2025-12-16"],["OCBC Al-Amin","Fixed Deposit-i Board",1.85,1.95,2.05,2.1,2.1,"2026-01-01"],["Hong Leong / HLB Islamic","12-month FDR reference",null,null,null,1.8,null,"2026-08-01"]],"savings":[["CIMB","Regular Savings Account",0.05,0.25,"Tiered: first RM100k 0.05%, >RM300k 0.25%","2026-07-24"],["CIMB","Senior Savings Account",0.2,0.6,"Tiered to >RM100k","2026-07-24"],["CIMB","Salary Account",0.05,0.3,"Tiered to >RM300k","2026-05-01"],["Standard Chartered","Basic Savings Account",0.25,0.25,"All balances","2009-05-25"],["Standard Chartered","Young Savers Account",0.25,1.75,"Up to RM50k 1.75%; above RM50k 0.25%","2025-12-16"],["AmBank","eFlex Savings Account/-i",0.5,1.65,"0.50% daily accrual + bonus to 1.65% if threshold conditions met","2026-08-25"],["AmBank","AmGenius Savings / Savers\u2019 G.A.N.G",0.3,1.65,"Up to RM100k 1.65%; above RM100k 0.30%","2026-08-25"]],"cards":[["CIMB",15,17,18,"5% or RM50","1%, min RM10 max RM100","Cash advance 5% or RM15 minimum"],["Maybank",15,17,18,"See statement / product","Tiered bank rules","Cash advance 2.52% or RM11.65 minimum from 7 Jan 2026"],["Standard Chartered",15,17,18,"5% or RM50","1%, min RM10 max RM100","Cash advance RM12.40/transaction"]]};
+const $=id=>document.getElementById(id), money=n=>new Intl.NumberFormat('en-MY',{style:'currency',currency:'MYR'}).format(Number.isFinite(n)?n:0);
+function amort(P,annual,years){P=Math.max(0,+P||0);const n=Math.max(1,Math.round((+years||1)*12)),r=(+annual||0)/100/12;if(r===0)return {m:P/n,total:P,cost:0};const m=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),total=m*n;return {m,total,cost:total-P};}
+function flat(P,annual,years){P=Math.max(0,+P||0);const y=Math.max(1,+years||1),cost=P*(+annual||0)/100*y,total=P+cost;return {m:total/(y*12),total,cost};}
+function sal(){const g=Math.max(0,+$('salGross').value||0),age=$('salAge').value,epf=age==='60'?0:g*(+$('salEpfPct').value||0)/100,soc=age==='60'?Math.min(g,6000)*.0125:Math.min(g,6000)*.005,eis=$('salEis').value==='yes'&&age!=='60'?Math.min(g,6000)*.002:0;$('salNet').textContent=money(g-epf-soc-eis);$('salEpfOut').textContent=money(epf);$('salSocso').textContent=money(soc);$('salEisOut').textContent=money(eis)}
+function home(){const p=+$('hPrice').value||0,d=Math.min(100,Math.max(0,+$('hDown').value||0)),loan=p*(1-d/100),x=amort(loan,+$('hRate').value,+$('hYears').value);$('hMonthly').textContent=money(x.m);$('hLoan').textContent=money(loan);$('hInt').textContent=money(x.cost);$('hTotal').textContent=money(x.total)}
+function car(){const p=+$('cPrice').value||0,d=Math.min(100,Math.max(0,+$('cDown').value||0)),loan=p*(1-d/100),x=$('cMethod').value==='flat'?flat(loan,+$('cRate').value,+$('cYears').value):amort(loan,+$('cRate').value,+$('cYears').value);$('cMonthly').textContent=money(x.m);$('cLoan').textContent=money(loan);$('cInt').textContent=money(x.cost);$('cTotal').textContent=money(x.total)}
+function personal(){const P=+$('pAmt').value||0,x=$('pMethod').value==='flat'?flat(P,+$('pRate').value,+$('pYears').value):amort(P,+$('pRate').value,+$('pYears').value);$('pMonthly').textContent=money(x.m);$('pCost').textContent=money(x.cost);$('pTotal').textContent=money(x.total);$('pRateOut').textContent=(+$('pRate').value||0).toFixed(2)+'%'}
+function savings(){const P=Math.max(0,+$('sBal').value||0),r=Math.max(0,+$('sRate').value||0)/100,m=Math.max(1,+$('sMonths').value||1),i=P*r*m/12;$('sInterest').textContent=money(i);$('sEnd').textContent=money(P+i)}
+function card(){let bal=Math.max(0,+$('ccBal').value||0),pay=Math.max(0,+$('ccPay').value||0),annual=+$('ccRate').value||18,r=annual/100/12,totalInt=0,totalPaid=0,months=0;if(pay<=0){$('ccMonths').textContent='—';$('ccInterest').textContent='—';$('ccTotal').textContent='—';return}while(bal>0.005&&months<1200){const interest=bal*r; if(pay<=interest&&months===0){$('ccMonths').textContent='Payment too low';$('ccInterest').textContent='—';$('ccTotal').textContent='—';$('ccRateOut').textContent=annual+'%';return} totalInt+=interest;bal+=interest;const actual=Math.min(pay,bal);bal-=actual;totalPaid+=actual;months++} $('ccMonths').textContent=months>=1200?'1200+':months;$('ccInterest').textContent=money(totalInt);$('ccTotal').textContent=money(totalPaid);$('ccRateOut').textContent=annual+'%'}
+function badge(status){let c=status.toLowerCase().includes('verified')?'ok':status.toLowerCase().includes('conflict')?'bad':'warn';return `<span class="badge ${c}">${status}</span>`}
+$('homeRows').innerHTML=D.home.map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]==null?'—':r[1].toFixed(2)+'%'}</td><td>${badge(r[2])}</td><td>${r[3]}</td></tr>`).join('');
+$('carRows').innerHTML=D.car.map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td><td>${r[2]==null?'—':r[2].toFixed(2)+'%'}</td><td>${r[3]}</td><td>${badge(r[4])}</td></tr>`).join('');
+$('personalRows').innerHTML=D.personal.map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td><td>${r[2]==null?'—':(r[2].toFixed(2)+(r[3]!=null&&r[3]!==r[2]?'–'+r[3].toFixed(2):'')+'%')}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+$('savingRows').innerHTML=D.savings.map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}</td><td>${r[2].toFixed(2)}%</td><td>${r[3].toFixed(2)}%</td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+$('cardRows').innerHTML=D.cards.map(r=>`<tr><td><strong>${r[0]}</strong></td><td>${r[1]}%</td><td>${r[2]}%</td><td>${r[3]}%</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td></tr>`).join('');
+const fdBank=$('fdBank'),fdTenure=$('fdTenure');fdBank.innerHTML=D.fd.map((r,i)=>`<option value="${i}">${r[0]} — ${r[1]}</option>`).join('');
+function fdTenures(){const r=D.fd[+fdBank.value||0],vals=[[1,r[2]],[3,r[3]],[6,r[4]],[12,r[5]],[24,r[6]]].filter(x=>x[1]!=null);fdTenure.innerHTML=vals.map(v=>`<option value="${v[0]}" data-rate="${v[1]}">${v[0]} months — ${v[1].toFixed(2)}%</option>`).join('');fdCalc()}
+function fdCalc(){const P=Math.max(0,+$('fdP').value||0),o=fdTenure.selectedOptions[0];if(!o)return;const m=+o.value,r=+o.dataset.rate/100,i=P*r*m/12;$('fdInterest').textContent=money(i);$('fdMaturity').textContent=money(P+i)}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active')}));
+['salGross','salAge','salEpfPct','salEis'].forEach(id=>$(id).addEventListener('input',sal));['hPrice','hDown','hRate','hYears'].forEach(id=>$(id).addEventListener('input',home));['cPrice','cDown','cRate','cYears','cMethod'].forEach(id=>$(id).addEventListener('input',car));['pAmt','pRate','pYears','pMethod'].forEach(id=>$(id).addEventListener('input',personal));['sBal','sRate','sMonths'].forEach(id=>$(id).addEventListener('input',savings));['ccBal','ccRate','ccPay'].forEach(id=>$(id).addEventListener('input',card));fdBank.addEventListener('change',fdTenures);fdTenure.addEventListener('change',fdCalc);$('fdP').addEventListener('input',fdCalc);
+sal();home();car();personal();savings();card();fdTenures();
+
+document.querySelectorAll('.quick-nav button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const target=btn.dataset.jump;
+    const tab=document.querySelector(`.tab[data-tab="${target}"]`);
+    if(tab) tab.click();
+    const panel=document.getElementById(target);
+    if(panel) panel.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    if(tab.scrollIntoView){
+      tab.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    }
+  });
+});
+
+</script></body></html>

@@ -1,0 +1,17 @@
+KiraMY OWNERSHIP RECORD
+Project: KiraMY by Razri
+Release: V1.2.0
+Date prepared: 2026-10-02
+Copyright notice: Copyright © 2026 Razri. All Rights Reserved.
+
+Recommended ownership evidence:
+- Keep this original ZIP and its SHA-256 hash.
+- Keep dated source-control/Git history.
+- Keep screenshots/releases showing publication history.
+- For stronger evidentiary support in Malaysia, consider MyIPO Copyright Voluntary Notification.
+- For any formal filing, use the owner's full legal name rather than only the public brand name.
+
+Important:
+Copyright does not monopolize financial formulas, mathematical concepts, ideas, procedures,
+or public factual data. It protects qualifying original expression such as source code,
+written material, graphics/interface design, arrangement and other original content.

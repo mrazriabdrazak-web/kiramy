@@ -1,0 +1,25 @@
+KiraMY by Razri — Proprietary License / All Rights Reserved
+Copyright © 2026 Razri. All Rights Reserved.
+
+PUBLIC USE
+You may access and use the hosted KiraMY calculators for personal, non-commercial calculations.
+
+RESTRICTIONS
+Except with prior written permission from the copyright owner, you may not:
+1. Copy or reproduce the KiraMY source code or interface.
+2. Republish, redistribute, sublicense, sell, rent, or commercially exploit KiraMY.
+3. Mirror or host a copied version of KiraMY.
+4. Rebrand KiraMY or remove ownership/copyright notices.
+5. Create or distribute a substantially copied derivative of KiraMY's protectable code, content, interface, or branding.
+
+EXCLUSIONS
+This notice does not claim ownership of mathematical formulas, ideas, methods of operation,
+Malaysian statutory rules, official bank/regulator facts, or third-party material.
+
+NO WARRANTY
+KiraMY is provided for informational/calculation purposes. Financial rates and regulatory data
+can change and should be independently verified before making a financial decision.
+
+Owner/public brand: Razri
+Project: KiraMY
+First public release year: 2026
