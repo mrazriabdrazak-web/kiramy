@@ -1,0 +1,11 @@
+KiraMY V1.3E UI QA REPORT
+
+ownership_tab_present: False
+ownership_section_present: False
+share_button_present: True
+favicon_reference_present: True
+og_image_present: True
+mobile_media_present: True
+reduced_motion_present: True
+calculator_tabs: 15
+calculator_panels: 8
